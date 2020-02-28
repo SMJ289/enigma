@@ -1,1 +1,31 @@
-echo "coverage" >> .gitignore
+.bundle
+
+## MAC OS
+.DS_Store
+.document
+
+## TEXTMATE
+*.tmproj
+tmtags
+
+## EMACS
+*~
+\#*
+.\#*
+
+## VIM
+*.swp
+
+## PROJECT::GENERAL
+/coverage
+rdoc
+pkg
+tmp
+.rvmrc
+
+## PROJECT::SPECIFIC
+sandbox.rb
+.yardoc
+spec/fixtures/coverage
+spec/fixtures/frameworks/coverage
+test_projects/**/coverage
