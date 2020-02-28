@@ -2,9 +2,12 @@ require 'date'
 
 class Enigma
 
-  def method_name
-
+  def generate_random_key
+    numbers = []
+    5.times { numbers << rand(9) }
+    numbers
   end
+
   def encrypt(string, key, date)
     encryption = {}
   end

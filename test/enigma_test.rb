@@ -11,6 +11,22 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, @enigma
   end
 
+  def test_it_can_generate_random_key
+    assert_equal 5, @enigma.generate_random_key.length
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
   def test_it_can_encrypt
     skip
     expected = {
