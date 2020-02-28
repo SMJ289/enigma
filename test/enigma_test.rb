@@ -3,40 +3,25 @@ require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
 
-  def test_it_exists
-    enigma = Enigma.new
-    assert_instance_of Enigma, enigma
+  def setup
+    @enigma = Enigma.new
   end
 
+  def test_it_exists
+    assert_instance_of Enigma, @enigma
+  end
+
+  def test_it_can_encrypt
+    expected = {
+     encryption: "keder ohulw",
+     key: "02715",
+     date: "040895"
+    }
+
+    assert_instance_of expected, @enigma.encrypt("hello world", "02715", "040895")
+  end
 end
 
-
-
-
-
-
-
-
-
-
-# pry(main)> require 'date'
-# #=> true
-#
-# pry(main)> require './lib/enigma'
-# #=> true
-#
-# pry(main)> enigma = Enigma.new
-# #=> #<Enigma:0x00007ff90f24cb78...>
-#
-# # encrypt a message with a key and date
-# pry(main)> enigma.encrypt("hello world", "02715", "040895")
-# #=>
-# #   {
-# #     encryption: "keder ohulw",
-# #     key: "02715",
-# #     date: "040895"
-# #   }
-#
 # # decrypt a message with a key and date
 # pry(main) > enigma.decrypt("keder ohulw", "02715", "040895")
 # #=>
