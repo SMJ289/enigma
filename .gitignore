@@ -24,7 +24,7 @@ tmp
 .rvmrc
 
 ## PROJECT::SPECIFIC
-
+sandbox.rb
 .yardoc
 spec/fixtures/coverage
 spec/fixtures/frameworks/coverage
