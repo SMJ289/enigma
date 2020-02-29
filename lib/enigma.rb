@@ -57,6 +57,10 @@ class Enigma
     ("a".."z").to_a << " "
   end
 
+  def char_set_a
+    shifted_set = char_set.rotate(generate_shifts[:a])
+    char_set.zip(shifted_set).to_h
+  end
 
 
 
