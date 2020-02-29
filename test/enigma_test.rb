@@ -100,7 +100,20 @@ class EnigmaTest < Minitest::Test
      "p"=>"s","q"=>"t","r"=>"u","s"=>"v","t"=>"w","u"=>"x","v"=>"y","w"=>"z",
      "x"=>" ","y"=>"a","z"=>"b"," "=>"c"}
 
-     assert_equal expected, @enigma.shifted_char_set(3)
+    assert_equal expected, @enigma.shifted_char_set(3)
+  end
+
+  def test_it_can_shift_string
+    expected_shifts = {
+      a: 3,
+      b: 27,
+      c: 73,
+      d: 20
+    }
+    @enigma.stubs(:shifts).returns(expected_shifts)
+
+    assert_equal "keder ohulw", @enigma.shift_string("hello world")
+
   end
 
 
