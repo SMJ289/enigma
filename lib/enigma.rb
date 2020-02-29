@@ -11,10 +11,10 @@ class Enigma
   def make_keys
     keys = {}
     values = generate_random_key
-    keys[:a] = values[0..1]
-    keys[:b] = values[1..2]
-    keys[:c] = values[2..3]
-    keys[:d] = values[3..4]
+    keys[:a] = values[0..1].join.to_i
+    keys[:b] = values[1..2].join.to_i
+    keys[:c] = values[2..3].join.to_i
+    keys[:d] = values[3..4].join.to_i
     keys
   end
 

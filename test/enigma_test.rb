@@ -19,10 +19,10 @@ class EnigmaTest < Minitest::Test
     @enigma.stubs(:generate_random_key).returns([0,2,7,1,5])
 
     expected = {
-      a: [0,2],
-      b: [2,7],
-      c: [7,1],
-      d: [1,5]
+      a: 2,
+      b: 27,
+      c: 71,
+      d: 15
     }
     assert_equal expected, @enigma.make_keys
   end
@@ -60,10 +60,28 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.generate_offsets
   end
 
-  def test_it_can_generate_final_shifts
-
-
-  end
+  # def test_it_can_generate_final_shifts
+  #   expected_keys = {
+  #     a: [0,2],
+  #     b: [2,7],
+  #     c: [7,1],
+  #     d: [1,5]
+  #   }
+  #   @enigma.stubs(:make_keys).returns(expected_keys)
+  #
+  #   expected_offsets = {
+  #     a: "1",
+  #     b: "0",
+  #     c: "2",
+  #     d: "5"
+  #   }
+  #   @enigma.stubs(:generate_offsets).returns(expected_offsets)
+  #
+  #   expected_shifts = {
+  #     a:
+  #   }
+  #
+  # end
 
 
 
