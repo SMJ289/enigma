@@ -26,6 +26,22 @@ class Enigma
     generate_date.to_i ** 2
   end
 
+  def truncate_date
+    square_date.to_s[-4..-1]
+  end
+
+  def generate_offsets
+    offsets = {}
+    values = truncate_date
+    offsets[:a] = values[0]
+    offsets[:b] = values[1]
+    offsets[:c] = values[2]
+    offsets[:d] = values[3]
+    offsets
+  end
+
+
+
 
 
 
