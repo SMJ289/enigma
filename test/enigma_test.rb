@@ -52,20 +52,20 @@ class EnigmaTest < Minitest::Test
     @enigma.stubs(:truncate_date).returns("1025")
 
     expected = {
-      a: "1",
-      b: "0",
-      c: "2",
-      d: "5"
+      a: 1,
+      b: 0,
+      c: 2,
+      d: 5
     }
     assert_equal expected, @enigma.generate_offsets
   end
 
   # def test_it_can_generate_final_shifts
   #   expected_keys = {
-  #     a: [0,2],
-  #     b: [2,7],
-  #     c: [7,1],
-  #     d: [1,5]
+  #     a: 2,
+  #     b: 27,
+  #     c: 71,
+  #     d: 15
   #   }
   #   @enigma.stubs(:make_keys).returns(expected_keys)
   #

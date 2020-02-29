@@ -33,10 +33,10 @@ class Enigma
   def generate_offsets
     offsets = {}
     values = truncate_date
-    offsets[:a] = values[0]
-    offsets[:b] = values[1]
-    offsets[:c] = values[2]
-    offsets[:d] = values[3]
+    offsets[:a] = values[0].to_i
+    offsets[:b] = values[1].to_i
+    offsets[:c] = values[2].to_i
+    offsets[:d] = values[3].to_i
     offsets
   end
 
