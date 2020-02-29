@@ -37,6 +37,11 @@ class EnigmaTest < Minitest::Test
     assert_equal "040895", @enigma.generate_date("040895")
   end
 
+  def test_it_can_square_date
+    @enigma.stubs(:generate_date).returns("040895")
+    
+    assert_equal 1672401025, @enigma.square_date
+  end
 
 
 
