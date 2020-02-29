@@ -18,9 +18,17 @@ class Enigma
     keys
   end
 
+
+
   def encrypt(string, key, date)
     encryption = {}
   end
+
+  def generate_date(date = Date::today.strftime("%e%m%y"))
+    date
+  end
+
+
 
   # def encrypt(string, key, date)
     # encryption_hash = {}

@@ -27,6 +27,14 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.make_keys
   end
 
+  def test_it_can_generate_todays_date
+    date = Date::today.strftime("%e%m%y")
+    
+    assert_equal date, @enigma.generate_date()
+  end
+
+
+
 
 
 
