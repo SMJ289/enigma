@@ -84,7 +84,7 @@ class EnigmaTest < Minitest::Test
       d: 20
     }
 
-    assert_equal expected_shifts, @enigma.generate_shifts
+    assert_equal expected_shifts, @enigma.shifts
   end
 
   def test_it_can_generate_char_set
@@ -95,21 +95,12 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_create_shifted_char_sets
-    expected_shifts = {
-      a: 3,
-      b: 27,
-      c: 73,
-      d: 20
-    }
-
-    @enigma.stubs(:generate_shifts).returns(expected_shifts)
-
     expected = {"a"=>"d","b"=>"e","c"=>"f","d"=>"g","e"=>"h","f"=>"i","g"=>"j",
      "h"=>"k","i"=>"l","j"=>"m","k"=>"n","l"=>"o","m"=>"p","n"=>"q","o"=>"r",
      "p"=>"s","q"=>"t","r"=>"u","s"=>"v","t"=>"w","u"=>"x","v"=>"y","w"=>"z",
      "x"=>" ","y"=>"a","z"=>"b"," "=>"c"}
 
-     assert_equal expected, @enigma.char_set_a
+     assert_equal expected, @enigma.shifted_char_set(3)
   end
 
 

@@ -40,15 +40,11 @@ class Enigma
     offsets
   end
 
-  def generate_shifts
+  def shifts
     shifts = {}
     shifts[:a] = generate_keys[:a] + generate_offsets[:a]
-    shifts[:a] = generate_keys[:a] + generate_offsets[:a]
-    shifts[:b] = generate_keys[:b] + generate_offsets[:b]
     shifts[:b] = generate_keys[:b] + generate_offsets[:b]
     shifts[:c] = generate_keys[:c] + generate_offsets[:c]
-    shifts[:c] = generate_keys[:c] + generate_offsets[:c]
-    shifts[:d] = generate_keys[:d] + generate_offsets[:d]
     shifts[:d] = generate_keys[:d] + generate_offsets[:d]
     shifts
   end
@@ -57,8 +53,8 @@ class Enigma
     ("a".."z").to_a << " "
   end
 
-  def char_set_a
-    shifted_set = char_set.rotate(generate_shifts[:a])
+  def shifted_char_set(shift)
+    shifted_set = char_set.rotate(shift)
     char_set.zip(shifted_set).to_h
   end
 
