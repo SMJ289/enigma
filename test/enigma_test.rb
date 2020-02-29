@@ -15,6 +15,18 @@ class EnigmaTest < Minitest::Test
     assert_equal 5, @enigma.generate_random_key.length
   end
 
+  def test_it_can_generate_keys_hash
+    @enigma.stubs(:generate_random_key).returns([1,0,5,8,9])
+
+    expected = {
+      a: [1,0],
+      b: [0,5],
+      c: [5,8],
+      d: [8,9]
+    }
+    assert_equal expected, @enigma.make_keys
+  end
+
 
 
 

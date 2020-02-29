@@ -8,6 +8,16 @@ class Enigma
     numbers
   end
 
+  def make_keys
+    keys = {}
+    values = generate_random_key
+    keys[:a] = values[0..1]
+    keys[:b] = values[1..2]
+    keys[:c] = values[2..3]
+    keys[:d] = values[3..4]
+    keys
+  end
+
   def encrypt(string, key, date)
     encryption = {}
   end
