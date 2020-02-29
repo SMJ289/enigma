@@ -16,13 +16,13 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_generate_keys_hash
-    @enigma.stubs(:generate_random_key).returns([1,0,5,8,9])
+    @enigma.stubs(:generate_random_key).returns([0,2,7,1,5])
 
     expected = {
-      a: [1,0],
-      b: [0,5],
-      c: [5,8],
-      d: [8,9]
+      a: [0,2],
+      b: [2,7],
+      c: [7,1],
+      d: [1,5]
     }
     assert_equal expected, @enigma.make_keys
   end
@@ -39,10 +39,31 @@ class EnigmaTest < Minitest::Test
 
   def test_it_can_square_date
     @enigma.stubs(:generate_date).returns("040895")
-    
+
     assert_equal 1672401025, @enigma.square_date
   end
 
+  def test_it_can_truncate_date
+    @enigma.stubs(:square_date).returns(1672401025)
+    assert_equal "1025", @enigma.truncate_date
+  end
+
+  def test_it_can_generate_offsets
+    @enigma.stubs(:truncate_date).returns("1025")
+
+    expected = {
+      a: "1",
+      b: "0",
+      c: "2",
+      d: "5"
+    }
+    assert_equal expected, @enigma.generate_offsets
+  end
+
+  def test_it_can_generate_final_shifts
+
+
+  end
 
 
 
