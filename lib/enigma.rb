@@ -40,6 +40,15 @@ class Enigma
     offsets
   end
 
+  def generate_shifts
+    shifts = {}
+    shifts[:a] = make_keys[:a] + generate_offsets[:a]
+    shifts[:b] = make_keys[:b] + generate_offsets[:b]
+    shifts[:c] = make_keys[:c] + generate_offsets[:c]
+    shifts[:d] = make_keys[:d] + generate_offsets[:d]
+    shifts
+  end
+
 
 
 
