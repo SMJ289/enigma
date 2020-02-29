@@ -8,7 +8,7 @@ class Enigma
     numbers
   end
 
-  def make_keys
+  def generate_keys
     keys = {}
     values = generate_random_key
     keys[:a] = values[0..1].join.to_i
@@ -42,10 +42,14 @@ class Enigma
 
   def generate_shifts
     shifts = {}
-    shifts[:a] = make_keys[:a] + generate_offsets[:a]
-    shifts[:b] = make_keys[:b] + generate_offsets[:b]
-    shifts[:c] = make_keys[:c] + generate_offsets[:c]
-    shifts[:d] = make_keys[:d] + generate_offsets[:d]
+    shifts[:a] = generate_keys[:a] + generate_offsets[:a]
+    shifts[:a] = generate_keys[:a] + generate_offsets[:a]
+    shifts[:b] = generate_keys[:b] + generate_offsets[:b]
+    shifts[:b] = generate_keys[:b] + generate_offsets[:b]
+    shifts[:c] = generate_keys[:c] + generate_offsets[:c]
+    shifts[:c] = generate_keys[:c] + generate_offsets[:c]
+    shifts[:d] = generate_keys[:d] + generate_offsets[:d]
+    shifts[:d] = generate_keys[:d] + generate_offsets[:d]
     shifts
   end
 
@@ -63,6 +67,7 @@ class Enigma
   # def encrypt(string, key, date)
     # encryption_hash = {}
     # encryption_hash[:encryption] = method_that_encrypts_string
+    # encryption_hash[:key] = method_that_makes_key
     # encryption_hash[:key] = method_that_makes_key
     # encryption_hash[:date] = method_that_gets_date
   # end

@@ -24,7 +24,7 @@ class EnigmaTest < Minitest::Test
       c: 71,
       d: 15
     }
-    assert_equal expected, @enigma.make_keys
+    assert_equal expected, @enigma.generate_keys
   end
 
   def test_it_can_generate_todays_date
@@ -67,7 +67,7 @@ class EnigmaTest < Minitest::Test
       c: 71,
       d: 15
     }
-    @enigma.stubs(:make_keys).returns(expected_keys)
+    @enigma.stubs(:generate_keys).returns(expected_keys)
 
     expected_offsets = {
       a: 1,
