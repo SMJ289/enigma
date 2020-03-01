@@ -80,7 +80,7 @@ class EnigmaTest < Minitest::Test
       d: 20
     }
 
-    assert_equal expected_shifts, @enigma.shifts
+    assert_equal expected_shifts, @enigma.generate_shifts
   end
 
   def test_it_can_generate_char_set
@@ -106,7 +106,7 @@ class EnigmaTest < Minitest::Test
       c: 73,
       d: 20
     }
-    @enigma.stubs(:shifts).returns(expected_shifts)
+    @enigma.stubs(:generate_shifts).returns(expected_shifts)
 
     assert_equal "keder ohulw", @enigma.shift_string("hello world")
     assert_equal "keder ohulw!", @enigma.shift_string("hello world!")
@@ -121,7 +121,7 @@ class EnigmaTest < Minitest::Test
       c: 73,
       d: 20
     }
-    @enigma.stubs(:shifts).returns(expected_shifts)
+    @enigma.stubs(:generate_shifts).returns(expected_shifts)
 
     assert_equal "hello world", @enigma.unshift_string("keder ohulw")
     assert_equal "hello world!", @enigma.unshift_string("keder ohulw!")
@@ -134,7 +134,7 @@ class EnigmaTest < Minitest::Test
       c: 73,
       d: 20
     }
-    @enigma.stubs(:shifts).returns(expected_shifts)
+    @enigma.stubs(:generate_shifts).returns(expected_shifts)
 
     expected = {
       encryption: "keder ohulw",
@@ -154,7 +154,7 @@ class EnigmaTest < Minitest::Test
       c: 73,
       d: 20
     }
-    @enigma.stubs(:shifts).returns(expected_shifts)
+    @enigma.stubs(:generate_shifts).returns(expected_shifts)
 
     expected = {
       decryption: "hello world",
