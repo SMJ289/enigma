@@ -60,6 +60,10 @@ class Enigma
 
   def shift_string(string)
     encrypted_message = []
+    shift_a = shifted_char_set(shifts[:a])
+    shift_b = shifted_char_set(shifts[:b])
+    shift_c = shifted_char_set(shifts[:c])
+    shift_d = shifted_char_set(shifts[:d])
 
     string.each_char.with_index do |char, index|
       if !char_set.include?(char)
@@ -67,13 +71,13 @@ class Enigma
         next
       end
       if index % 4 == 0
-        encrypted_message << shifted_char_set(shifts[:a])[char]
+        encrypted_message << shift_a[char]
       elsif index % 4 == 1
-        encrypted_message << shifted_char_set(shifts[:b])[char]
+        encrypted_message << shift_b[char]
       elsif index % 4 == 2
-        encrypted_message << shifted_char_set(shifts[:c])[char]
+        encrypted_message << shift_c[char]
       else
-        encrypted_message << shifted_char_set(shifts[:d])[char]
+        encrypted_message << shift_d[char]
       end
     end
     encrypted_message.join
