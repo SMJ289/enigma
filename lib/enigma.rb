@@ -19,7 +19,7 @@ class Enigma
   end
 
   def generate_date
-    Date::today.strftime("%e%m%y")
+    Date::today.strftime("%d%m%y")
   end
 
   def square_date

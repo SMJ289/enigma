@@ -28,7 +28,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_generate_todays_date
-    date = Date::today.strftime("%e%m%y")
+    date = Date::today.strftime("%d%m%y")
 
     assert_equal date, @enigma.generate_date
   end
