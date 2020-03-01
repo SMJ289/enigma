@@ -125,6 +125,9 @@ class EnigmaTest < Minitest::Test
 
     assert_equal "hello world", @enigma.unshift_string("keder ohulw")
     assert_equal "hello world!", @enigma.unshift_string("keder ohulw!")
+    assert_equal "!hello world", @enigma.unshift_string("!hxeoosprrdx")
+    assert_equal "hello! world", @enigma.unshift_string("keder!sprrdx")
+
   end
 
   def test_it_can_encrypt
