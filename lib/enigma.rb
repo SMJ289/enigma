@@ -83,9 +83,7 @@ class Enigma
     string.each_char.with_index do |char, index|
       if !char_set.include?(char)
         encrypted_message << char
-        next
-      end
-      if index % 4 == 0
+      elsif index % 4 == 0
         encrypted_message << shifts[:a][char]
       elsif index % 4 == 1
         encrypted_message << shifts[:b][char]
