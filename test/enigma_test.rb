@@ -110,6 +110,8 @@ class EnigmaTest < Minitest::Test
 
     assert_equal "keder ohulw", @enigma.shift_string("hello world")
     assert_equal "keder ohulw!", @enigma.shift_string("hello world!")
+    assert_equal "!hxeoosprrdx", @enigma.shift_string("!hello world")
+    assert_equal "keder!sprrdx", @enigma.shift_string("hello! world")
   end
 
   def test_it_can_unshift_string
