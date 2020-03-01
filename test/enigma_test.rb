@@ -127,7 +127,6 @@ class EnigmaTest < Minitest::Test
     assert_equal "hello world!", @enigma.unshift_string("keder ohulw!")
     assert_equal "!hello world", @enigma.unshift_string("!hxeoosprrdx")
     assert_equal "hello! world", @enigma.unshift_string("keder!sprrdx")
-
   end
 
   def test_it_can_encrypt
@@ -166,6 +165,8 @@ class EnigmaTest < Minitest::Test
     }
 
    assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
+   @enigma.stubs(:generate_date).returns("040895")
+   assert_equal expected, @enigma.decrypt("keder ohulw", "02715")
   end
 
 end
