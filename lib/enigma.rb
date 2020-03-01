@@ -8,9 +8,9 @@ class Enigma
     numbers
   end
 
-  def generate_keys
+  def generate_keys(key = generate_random_key)
     keys = {}
-    values = generate_random_key
+    values = key
     keys[:a] = values[0..1].join.to_i
     keys[:b] = values[1..2].join.to_i
     keys[:c] = values[2..3].join.to_i
@@ -18,8 +18,8 @@ class Enigma
     keys
   end
 
-  def generate_date(date = Date::today.strftime("%e%m%y"))
-    date
+  def generate_date
+    Date::today.strftime("%e%m%y")
   end
 
   def square_date
@@ -60,8 +60,9 @@ class Enigma
 
   def shift_string(string)
     encrypted_message = []
+
     string.each_char.with_index do |char, index|
-      return encrypted_message << char if char_set.include?(char) == false
+      encrypted_message << char if char_set.include?(char) == false
         if index % 4 == 0
           encrypted_message << shifted_char_set(shifts[:a])[char]
         elsif index % 4 == 1
@@ -75,18 +76,11 @@ class Enigma
       encrypted_message.join
   end
 
-
-
-
-  def encrypt(string, key, date)
-    encryption = {}
+  def encrypt(string, key = generate_random_key, date = generate_date() )
+    encryption_data = {}
+    encryption_data[:encryption] = shift_string(string)
+    encryption_data[:key] = key
+    encryption_data[:date] = date
   end
 
-  # def encrypt(string, key, date)
-    # encryption_hash = {}
-    # encryption_hash[:encryption] = method_that_encrypts_string
-    # encryption_hash[:key] = method_that_makes_key
-    # encryption_hash[:key] = method_that_makes_key
-    # encryption_hash[:date] = method_that_gets_date
-  # end
 end
