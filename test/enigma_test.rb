@@ -30,11 +30,7 @@ class EnigmaTest < Minitest::Test
   def test_it_can_generate_todays_date
     date = Date::today.strftime("%e%m%y")
 
-    assert_equal date, @enigma.generate_date()
-  end
-
-  def test_it_can_return_given_date
-    assert_equal "040895", @enigma.generate_date("040895")
+    assert_equal date, @enigma.generate_date
   end
 
   def test_it_can_square_date
@@ -113,7 +109,58 @@ class EnigmaTest < Minitest::Test
     @enigma.stubs(:shifts).returns(expected_shifts)
 
     assert_equal "keder ohulw", @enigma.shift_string("hello world")
+    assert_equal "keder ohulw!", @enigma.shift_string("hello world!")
+  end
 
+  def test_it_can_unshift_string
+    expected_shifts = {
+      a: 3,
+      b: 27,
+      c: 73,
+      d: 20
+    }
+    @enigma.stubs(:shifts).returns(expected_shifts)
+
+    assert_equal "hello world", @enigma.unshift_string("keder ohulw")
+    assert_equal "hello world!", @enigma.unshift_string("keder ohulw!")
+  end
+
+  def test_it_can_encrypt
+    expected_shifts = {
+      a: 3,
+      b: 27,
+      c: 73,
+      d: 20
+    }
+    @enigma.stubs(:shifts).returns(expected_shifts)
+
+
+    expected = {
+      encryption: "keder ohulw",
+      key: "02715",
+      date: "040895"
+    }
+
+   assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
+  end
+
+  def test_it_can_decrypt
+    expected_shifts = {
+      a: 3,
+      b: 27,
+      c: 73,
+      d: 20
+    }
+    @enigma.stubs(:shifts).returns(expected_shifts)
+
+
+    expected = {
+      decryption: "hello world",
+      key: "02715",
+      date: "040895"
+    }
+
+   assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
 

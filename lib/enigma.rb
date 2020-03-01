@@ -76,11 +76,38 @@ class Enigma
       encrypted_message.join
   end
 
+  def unshift_string(string)
+    encrypted_message = []
+
+    string.each_char.with_index do |char, index|
+      encrypted_message << char if char_set.include?(char) == false
+        if index % 4 == 0
+          encrypted_message << shifted_char_set(-shifts[:a])[char]
+        elsif index % 4 == 1
+          encrypted_message << shifted_char_set(-shifts[:b])[char]
+        elsif index % 4 == 2
+          encrypted_message << shifted_char_set(-shifts[:c])[char]
+        else
+          encrypted_message << shifted_char_set(-shifts[:d])[char]
+        end
+      end
+      encrypted_message.join
+  end
+
   def encrypt(string, key = generate_random_key, date = generate_date() )
     encryption_data = {}
     encryption_data[:encryption] = shift_string(string)
     encryption_data[:key] = key
     encryption_data[:date] = date
+    encryption_data
+  end
+
+  def decrypt(string, key, date = generate_date() )
+    decryption_data = {}
+    decryption_data[:decryption] = unshift_string(string)
+    decryption_data[:key] = key
+    decryption_data[:date] = date
+    decryption_data
   end
 
 end
