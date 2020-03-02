@@ -3,7 +3,7 @@ require 'date'
 class Enigma
 
   def initialize
-    @date = nil
+    @offsets = {}
     @keys = {}
   end
 
@@ -21,26 +21,20 @@ class Enigma
     @keys[:d] = values[3..4].to_i
   end
 
-  def generate_date(date = Date::today.strftime("%d%m%y"))
-    @date = date
+  def generate_date
+    Date::today.strftime("%d%m%y")
   end
 
-  def square_date
-    @date.to_i ** 2
-  end
-
-  def truncate_date
+  def generate_offsets(date = generate_date)
+    square_date = date.to_i ** 2
     square_date.to_s[-4..-1]
-  end
 
-  def generate_offsets
-    offsets = {}
-    values = truncate_date
-    offsets[:a] = values[0].to_i
-    offsets[:b] = values[1].to_i
-    offsets[:c] = values[2].to_i
-    offsets[:d] = values[3].to_i
-    offsets
+    @offsets = {
+      a: date[0].to_i,
+      b: date[1].to_i,
+      c: date[2].to_i,
+      d: date[3].to_i
+    }
   end
 
   def generate_shifts
