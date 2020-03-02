@@ -42,22 +42,9 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_generate_final_shifts
-    expected_keys = {
-      a: 2,
-      b: 27,
-      c: 71,
-      d: 15
-    }
-    @enigma.stubs(:generate_keys).returns(expected_keys)
-
-    expected_offsets = {
-      a: 1,
-      b: 0,
-      c: 2,
-      d: 5
-    }
-    @enigma.stubs(:generate_offsets).returns(expected_offsets)
-
+    @enigma.generate_keys("02715")
+    @enigma.generate_offsets("040895")
+    
     expected_shifts = {
       a: 3,
       b: 27,
