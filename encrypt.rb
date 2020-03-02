@@ -7,7 +7,6 @@ message = handle.read.chomp
 
 encrypted_message = enigma.encrypt(message)
 
-File.write(ARGV[1], encrypted_message)
+File.write(ARGV[1], encrypted_message[:encryption])
 
-print "Created 'encrypted.txt' with the key #{encrypted_message[:key]}
-and date #{encrypted_message[:date]}"
+puts "Created 'encrypted.txt' with the key #{encrypted_message[:key]} and date #{encrypted_message[:date]}"
