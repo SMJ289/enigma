@@ -2,28 +2,31 @@ require 'date'
 
 class Enigma
 
+  def initialize
+    @date = nil
+    @keys = {}
+  end
+
   def generate_random_key
     numbers = []
     5.times { numbers << rand(9) }
-    numbers
+    numbers.join
   end
 
   def generate_keys(key = generate_random_key)
-    keys = {}
     values = key
-    keys[:a] = values[0..1].join.to_i
-    keys[:b] = values[1..2].join.to_i
-    keys[:c] = values[2..3].join.to_i
-    keys[:d] = values[3..4].join.to_i
-    keys
+    @keys[:a] = values[0..1].to_i
+    @keys[:b] = values[1..2].to_i
+    @keys[:c] = values[2..3].to_i
+    @keys[:d] = values[3..4].to_i
   end
 
-  def generate_date
-    Date::today.strftime("%d%m%y")
+  def generate_date(date = Date::today.strftime("%d%m%y"))
+    @date = date
   end
 
   def square_date
-    generate_date.to_i ** 2
+    @date.to_i ** 2
   end
 
   def truncate_date
@@ -42,10 +45,10 @@ class Enigma
 
   def generate_shifts
     shifts = {}
-    shifts[:a] = generate_keys[:a] + generate_offsets[:a]
-    shifts[:b] = generate_keys[:b] + generate_offsets[:b]
-    shifts[:c] = generate_keys[:c] + generate_offsets[:c]
-    shifts[:d] = generate_keys[:d] + generate_offsets[:d]
+    shifts[:a] = @keys[:a] + generate_offsets[:a]
+    shifts[:b] = @keys[:b] + generate_offsets[:b]
+    shifts[:c] = @keys[:c] + generate_offsets[:c]
+    shifts[:d] = @keys[:d] + generate_offsets[:d]
     shifts
   end
 
@@ -97,6 +100,8 @@ class Enigma
   end
 
   def encrypt(string, key = generate_random_key, date = generate_date)
+    generate_date(date)
+    generate_keys(key)
     encryption_data = {}
     encryption_data[:encryption] = shift_string(string)
     encryption_data[:key] = key
