@@ -109,29 +109,33 @@ class EnigmaTest < Minitest::Test
     }
 
    assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
+
    @enigma.stubs(:generate_date).returns("040895")
    assert_equal expected, @enigma.encrypt("hello world", "02715")
+
+   @enigma.stubs(:generate_random_key).returns("02715")
+   assert_equal expected, @enigma.encrypt("hello world")
   end
 
   def test_it_can_decrypt
-    skip
-    expected_shifts = {
-      a: 3,
-      b: 27,
-      c: 73,
-      d: 20
-    }
-    @enigma.stubs(:generate_shifts).returns(expected_shifts)
 
-    expected = {
+    decrypted = {
       decryption: "hello world",
       key: "02715",
       date: "040895"
     }
 
-   assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
+    encrypted = {
+      encryption: "keder ohulw",
+      key: "02715",
+      date: "040895"
+    }
+
+   assert_equal decrypted, @enigma.decrypt("keder ohulw", "02715", "040895")
+
    @enigma.stubs(:generate_date).returns("040895")
-   assert_equal expected, @enigma.decrypt("keder ohulw", "02715")
+   assert_equal decrypted, @enigma.decrypt("keder ohulw", "02715")
+   assert_equal decrypted, @enigma.decrypt(encrypted[:encryption], "02715")
   end
 
 end
