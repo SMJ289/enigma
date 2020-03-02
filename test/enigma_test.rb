@@ -44,7 +44,7 @@ class EnigmaTest < Minitest::Test
   def test_it_can_generate_final_shifts
     @enigma.generate_keys("02715")
     @enigma.generate_offsets("040895")
-    
+
     expected_shifts = {
       a: 3,
       b: 27,
@@ -109,8 +109,8 @@ class EnigmaTest < Minitest::Test
     }
 
    assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
-   # @enigma.stubs(:generate_date).returns("040895")
-   # assert_equal expected, @enigma.encrypt("hello world", "02715")
+   @enigma.stubs(:generate_date).returns("040895")
+   assert_equal expected, @enigma.encrypt("hello world", "02715")
   end
 
   def test_it_can_decrypt

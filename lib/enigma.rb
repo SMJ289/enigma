@@ -94,7 +94,7 @@ class Enigma
     encrypted_message.join
   end
 
-  def encrypt(string, key, date)
+  def encrypt(string, key, date = generate_date)
     generate_offsets(date)
     generate_keys(key)
     encryption_data = {}
