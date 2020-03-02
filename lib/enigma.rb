@@ -28,13 +28,13 @@ class Enigma
 
   def generate_offsets(date = generate_date)
     square_date = date.to_i ** 2
-    square_date.to_s[-4..-1]
+    truncated_date = square_date.to_s[-4..-1]
 
     @offsets = {
-      a: date[0].to_i,
-      b: date[1].to_i,
-      c: date[2].to_i,
-      d: date[3].to_i
+      a: truncated_date[0].to_i,
+      b: truncated_date[1].to_i,
+      c: truncated_date[2].to_i,
+      d: truncated_date[3].to_i
     }
   end
 
