@@ -20,4 +20,5 @@ class ShiftGeneratorTest < Minitest::Test
 
     assert_equal expected_shifts, @enigma.generate_shifts(keys, offsets)
   end
+
 end

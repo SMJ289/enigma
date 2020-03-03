@@ -12,6 +12,7 @@ class CipherTest < Minitest::Test
       c: 73,
       d: 20
     }
+
   end
 
   def test_it_can_generate_char_set
@@ -74,4 +75,5 @@ class CipherTest < Minitest::Test
     assert_equal "r", @enigma.determine_shift(shifted_sets, "o", 4, char_set)
     assert_equal "!", @enigma.determine_shift(shifted_sets, "!", 5, char_set)
   end
+
 end
