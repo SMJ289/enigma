@@ -5,7 +5,13 @@ class CipherTest < Minitest::Test
 
   def setup
     @enigma = Enigma.new
-    
+
+    @shifts = {
+      a: 3,
+      b: 27,
+      c: 73,
+      d: 20
+    }
   end
 
   def test_it_can_generate_char_set
@@ -25,64 +31,36 @@ class CipherTest < Minitest::Test
   end
 
   def test_it_can_shift_string
-    shifts = {
-      a: 3,
-      b: 27,
-      c: 73,
-      d: 20
-    }
-
-    assert_equal "keder ohulw", @enigma.shift_string("hello world", shifts)
-    assert_equal "keder ohulw!", @enigma.shift_string("hello world!", shifts)
-    assert_equal "!hxeoosprrdx", @enigma.shift_string("!hello world", shifts)
-    assert_equal "keder!sprrdx", @enigma.shift_string("hello! world", shifts)
+    assert_equal "keder ohulw", @enigma.shift_string("hello world", @shifts)
+    assert_equal "keder ohulw!", @enigma.shift_string("hello world!", @shifts)
+    assert_equal "!hxeoosprrdx", @enigma.shift_string("!hello world", @shifts)
+    assert_equal "keder!sprrdx", @enigma.shift_string("hello! world", @shifts)
   end
 
   def test_it_can_unshift_string
-    shifts = {
-      a: 3,
-      b: 27,
-      c: 73,
-      d: 20
-    }
-
-    assert_equal "hello world", @enigma.unshift_string("keder ohulw", shifts)
-    assert_equal "hello world!", @enigma.unshift_string("keder ohulw!", shifts)
-    assert_equal "!hello world", @enigma.unshift_string("!hxeoosprrdx", shifts)
-    assert_equal "hello! world", @enigma.unshift_string("keder!sprrdx", shifts)
+    assert_equal "hello world", @enigma.unshift_string("keder ohulw", @shifts)
+    assert_equal "hello world!", @enigma.unshift_string("keder ohulw!", @shifts)
+    assert_equal "!hello world", @enigma.unshift_string("!hxeoosprrdx", @shifts)
+    assert_equal "hello! world", @enigma.unshift_string("keder!sprrdx", @shifts)
   end
 
   def test_it_can_shift_chars
-    shifts = {
-      a: 3,
-      b: 27,
-      c: 73,
-      d: 20
-    }
-
     shifted_sets = {
-      a: @enigma.generate_shifted_char_set(shifts[:a]),
-      b: @enigma.generate_shifted_char_set(shifts[:b]),
-      c: @enigma.generate_shifted_char_set(shifts[:c]),
-      d: @enigma.generate_shifted_char_set(shifts[:d])
+      a: @enigma.generate_shifted_char_set(@shifts[:a]),
+      b: @enigma.generate_shifted_char_set(@shifts[:b]),
+      c: @enigma.generate_shifted_char_set(@shifts[:c]),
+      d: @enigma.generate_shifted_char_set(@shifts[:d])
     }
 
     assert_equal "keder ohulw", @enigma.shift_chars("hello world", shifted_sets)
   end
 
   def test_it_can_determine_shift
-    shifts = {
-      a: 3,
-      b: 27,
-      c: 73,
-      d: 20
-    }
-
     shifted_sets = {
-      a: @enigma.generate_shifted_char_set(shifts[:a]),
-      b: @enigma.generate_shifted_char_set(shifts[:b]),
-      c: @enigma.generate_shifted_char_set(shifts[:c]),
-      d: @enigma.generate_shifted_char_set(shifts[:d])
+      a: @enigma.generate_shifted_char_set(@shifts[:a]),
+      b: @enigma.generate_shifted_char_set(@shifts[:b]),
+      c: @enigma.generate_shifted_char_set(@shifts[:c]),
+      d: @enigma.generate_shifted_char_set(@shifts[:d])
     }
 
     char_set = @enigma.generate_char_set
