@@ -9,8 +9,7 @@ decrypted_message = enigma.decrypt(message, ARGV[2], ARGV[3])
 
 File.write(ARGV[1], decrypted_message[:decryption])
 
-print "Created 'decrypted.txt' with the key #{ARGV[2]}
-and date #{ARGV[3]}"
+puts "Created 'decrypted.txt' with the key #{ARGV[2]} and date #{ARGV[3]}"
 
 
 
