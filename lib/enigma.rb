@@ -26,15 +26,21 @@ class Enigma
     Date::today.strftime("%d%m%y")
   end
 
-  def generate_offsets(date = generate_date)
-    square_date = date.to_i ** 2
-    truncated_date = square_date.to_s[-4..-1]
+  def square_date(date)
+    date.to_i ** 2
+  end
 
+  def truncate_date(date)
+    square_date(date).to_s[-4..-1]
+  end
+
+  def generate_offsets(date = generate_date)
+    offset_values = truncate_date(date)
     @offsets = {
-      a: truncated_date[0].to_i,
-      b: truncated_date[1].to_i,
-      c: truncated_date[2].to_i,
-      d: truncated_date[3].to_i
+      a: offset_values[0].to_i,
+      b: offset_values[1].to_i,
+      c: offset_values[2].to_i,
+      d: offset_values[3].to_i
     }
   end
 
@@ -66,11 +72,12 @@ class Enigma
   end
 
   def unshift_string(string)
+    shifts = generate_shifts
     unshifted_sets = {
-    a: shifted_char_set(-generate_shifts[:a]),
-    b: shifted_char_set(-generate_shifts[:b]),
-    c: shifted_char_set(-generate_shifts[:c]),
-    d: shifted_char_set(-generate_shifts[:d])
+      a: shifted_char_set(-shifts[:a]),
+      b: shifted_char_set(-shifts[:b]),
+      c: shifted_char_set(-shifts[:c]),
+      d: shifted_char_set(-shifts[:d])
     }
     shift_chars(string, unshifted_sets)
   end
