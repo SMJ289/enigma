@@ -55,11 +55,12 @@ class Enigma
   end
 
   def shift_string(string)
+    shifts = generate_shifts
     shifted_sets = {
-      a: shifted_char_set(generate_shifts[:a]),
-      b: shifted_char_set(generate_shifts[:b]),
-      c: shifted_char_set(generate_shifts[:c]),
-      d: shifted_char_set(generate_shifts[:d])
+      a: shifted_char_set(shifts[:a]),
+      b: shifted_char_set(shifts[:b]),
+      c: shifted_char_set(shifts[:c]),
+      d: shifted_char_set(shifts[:d])
     }
     shift_chars(string, shifted_sets)
   end
