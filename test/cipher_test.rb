@@ -5,6 +5,7 @@ class CipherTest < Minitest::Test
 
   def setup
     @enigma = Enigma.new
+    
   end
 
   def test_it_can_generate_char_set
@@ -67,5 +68,30 @@ class CipherTest < Minitest::Test
     }
 
     assert_equal "keder ohulw", @enigma.shift_chars("hello world", shifted_sets)
+  end
+
+  def test_it_can_determine_shift
+    shifts = {
+      a: 3,
+      b: 27,
+      c: 73,
+      d: 20
+    }
+
+    shifted_sets = {
+      a: @enigma.generate_shifted_char_set(shifts[:a]),
+      b: @enigma.generate_shifted_char_set(shifts[:b]),
+      c: @enigma.generate_shifted_char_set(shifts[:c]),
+      d: @enigma.generate_shifted_char_set(shifts[:d])
+    }
+
+    char_set = @enigma.generate_char_set
+
+    assert_equal "k", @enigma.determine_shift(shifted_sets, "h", 0, char_set)
+    assert_equal "e", @enigma.determine_shift(shifted_sets, "e", 1, char_set)
+    assert_equal "d", @enigma.determine_shift(shifted_sets, "l", 2, char_set)
+    assert_equal "e", @enigma.determine_shift(shifted_sets, "l", 3, char_set)
+    assert_equal "r", @enigma.determine_shift(shifted_sets, "o", 4, char_set)
+    assert_equal "!", @enigma.determine_shift(shifted_sets, "!", 5, char_set)
   end
 end
