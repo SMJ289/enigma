@@ -50,8 +50,8 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_generate_final_shifts
-    @enigma.generate_keys("02715")
-    @enigma.generate_offsets("040895")
+    keys = @enigma.generate_keys("02715")
+    offsets = @enigma.generate_offsets("040895")
 
     expected_shifts = {
       a: 3,
@@ -60,7 +60,7 @@ class EnigmaTest < Minitest::Test
       d: 20
     }
 
-    assert_equal expected_shifts, @enigma.generate_shifts
+    assert_equal expected_shifts, @enigma.generate_shifts(keys, offsets)
   end
 
   def test_it_can_generate_char_set
@@ -80,33 +80,30 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_shift_string
-    expected_shifts = {
+    shifts = {
       a: 3,
       b: 27,
       c: 73,
       d: 20
     }
-    @enigma.stubs(:generate_shifts).returns(expected_shifts)
-
-    assert_equal "keder ohulw", @enigma.shift_string("hello world")
-    assert_equal "keder ohulw!", @enigma.shift_string("hello world!")
-    assert_equal "!hxeoosprrdx", @enigma.shift_string("!hello world")
-    assert_equal "keder!sprrdx", @enigma.shift_string("hello! world")
+    assert_equal "keder ohulw", @enigma.shift_string("hello world", shifts)
+    assert_equal "keder ohulw!", @enigma.shift_string("hello world!", shifts)
+    assert_equal "!hxeoosprrdx", @enigma.shift_string("!hello world", shifts)
+    assert_equal "keder!sprrdx", @enigma.shift_string("hello! world", shifts)
   end
 
   def test_it_can_unshift_string
-    expected_shifts = {
+    shifts = {
       a: 3,
       b: 27,
       c: 73,
       d: 20
     }
-    @enigma.stubs(:generate_shifts).returns(expected_shifts)
 
-    assert_equal "hello world", @enigma.unshift_string("keder ohulw")
-    assert_equal "hello world!", @enigma.unshift_string("keder ohulw!")
-    assert_equal "!hello world", @enigma.unshift_string("!hxeoosprrdx")
-    assert_equal "hello! world", @enigma.unshift_string("keder!sprrdx")
+    assert_equal "hello world", @enigma.unshift_string("keder ohulw", shifts)
+    assert_equal "hello world!", @enigma.unshift_string("keder ohulw!", shifts)
+    assert_equal "!hello world", @enigma.unshift_string("!hxeoosprrdx", shifts)
+    assert_equal "hello! world", @enigma.unshift_string("keder!sprrdx", shifts)
   end
 
   def test_it_can_encrypt
