@@ -1,15 +1,20 @@
 require './lib/enigma'
 enigma = Enigma.new
 
-handle = File.open(ARGV[0], "r")
+encryption_file = ARGV[0]
+decryption_file = ARGV[1]
+key = ARGV[2]
+date = ARGV[3]
+
+handle = File.open(encryption_file, "r")
 
 message = handle.read.chomp
 
-decrypted_message = enigma.decrypt(message, ARGV[2], ARGV[3])
+decrypted_message = enigma.decrypt(message, key, date)
 
-File.write(ARGV[1], decrypted_message[:decryption])
+File.write(decryption_file, decrypted_message[:decryption])
 
-puts "Created 'decrypted.txt' with the key #{ARGV[2]} and date #{ARGV[3]}"
+puts "Created '#{decryption_file}' with the key #{key} and date #{date}"
 
 
 
