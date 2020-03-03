@@ -9,29 +9,29 @@ module Cipher
     generate_char_set.zip(shifted_set).to_h
   end
 
-  def shift_string(string, shifts)
+  def shift_message(message, shifts)
     shifted_sets = {
       a: generate_shifted_char_set(shifts[:a]),
       b: generate_shifted_char_set(shifts[:b]),
       c: generate_shifted_char_set(shifts[:c]),
       d: generate_shifted_char_set(shifts[:d])
     }
-    shift_chars(string, shifted_sets)
+    shift_chars(message, shifted_sets)
   end
 
-  def unshift_string(string, shifts)
+  def unshift_message(message, shifts)
     unshifted_sets = {
       a: generate_shifted_char_set(-shifts[:a]),
       b: generate_shifted_char_set(-shifts[:b]),
       c: generate_shifted_char_set(-shifts[:c]),
       d: generate_shifted_char_set(-shifts[:d])
     }
-    shift_chars(string, unshifted_sets)
+    shift_chars(message, unshifted_sets)
   end
 
-  def shift_chars(string, shifts)
+  def shift_chars(message, shifts)
     char_set = generate_char_set
-    string.chars.map.with_index do |char, index|
+    message.chars.map.with_index do |char, index|
       determine_shift(shifts, char, index, char_set)
     end.join
   end
