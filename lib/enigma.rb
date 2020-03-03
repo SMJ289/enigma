@@ -103,21 +103,13 @@ class Enigma
   def encrypt(string, key = generate_random_key, date = generate_date)
     generate_offsets(date)
     generate_keys(key)
-    encryption_data = {}
-    encryption_data[:encryption] = shift_string(string)
-    encryption_data[:key] = key
-    encryption_data[:date] = date
-    encryption_data
+    { encryption: shift_string(string), key: key, date: date }
   end
 
   def decrypt(string, key, date = generate_date)
     generate_offsets(date)
     generate_keys(key)
-    decryption_data = {}
-    decryption_data[:decryption] = unshift_string(string)
-    decryption_data[:key] = key
-    decryption_data[:date] = date
-    decryption_data
+    { decryption: unshift_string(string), key: key, date: date }
   end
 
 end
