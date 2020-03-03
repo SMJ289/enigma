@@ -39,12 +39,10 @@ class Enigma
   end
 
   def generate_shifts
-    shifts = {}
-    shifts[:a] = @keys[:a] + @offsets[:a]
-    shifts[:b] = @keys[:b] + @offsets[:b]
-    shifts[:c] = @keys[:c] + @offsets[:c]
-    shifts[:d] = @keys[:d] + @offsets[:d]
-    shifts
+    { a: @keys[:a] + @offsets[:a],
+      b: @keys[:b] + @offsets[:b],
+      c: @keys[:c] + @offsets[:c],
+      d: @keys[:d] + @offsets[:d] }
   end
 
   def char_set
