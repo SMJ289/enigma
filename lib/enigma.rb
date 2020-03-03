@@ -1,7 +1,7 @@
 require 'date'
 
 class Enigma
-  
+
   def generate_random_key
     numbers = []
     5.times { numbers << rand(9) }
@@ -53,7 +53,6 @@ class Enigma
   end
 
   def shift_string(string, shifts)
-
     shifted_sets = {
       a: shifted_char_set(shifts[:a]),
       b: shifted_char_set(shifts[:b]),
