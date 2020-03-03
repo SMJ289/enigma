@@ -10,18 +10,18 @@ class Enigma
   include ShiftGenerator
   include Cipher
 
-  def encrypt(string, key = generate_random_key, date = generate_date)
+  def encrypt(message, key = generate_random_key, date = generate_date)
     offsets = generate_offsets(date)
     keys = generate_keys(key)
     shifts = generate_shifts(keys, offsets)
-    { encryption: shift_string(string, shifts), key: key, date: date }
+    { encryption: shift_message(message, shifts), key: key, date: date }
   end
 
-  def decrypt(string, key, date = generate_date)
+  def decrypt(message, key, date = generate_date)
     offsets = generate_offsets(date)
     keys = generate_keys(key)
     shifts = generate_shifts(keys, offsets)
-    { decryption: unshift_string(string, shifts), key: key, date: date }
+    { decryption: unshift_message(message, shifts), key: key, date: date }
   end
 
 end
