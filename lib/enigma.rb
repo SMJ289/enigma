@@ -2,11 +2,6 @@ require 'date'
 
 class Enigma
 
-  def initialize
-    @offsets = {}
-    @keys = {}
-  end
-
   def generate_random_key
     numbers = []
     5.times { numbers << rand(9) }
@@ -14,37 +9,38 @@ class Enigma
   end
 
   def generate_keys(key = generate_random_key)
-    @keys = {
-      a: key[0..1].to_i,
+    { a: key[0..1].to_i,
       b: key[1..2].to_i,
       c: key[2..3].to_i,
-      d: key[3..4].to_i
-    }
+      d: key[3..4].to_i }
   end
 
   def generate_date
     Date::today.strftime("%d%m%y")
   end
 
-  def generate_offsets(date = generate_date)
-    square_date = date.to_i ** 2
-    truncated_date = square_date.to_s[-4..-1]
-
-    @offsets = {
-      a: truncated_date[0].to_i,
-      b: truncated_date[1].to_i,
-      c: truncated_date[2].to_i,
-      d: truncated_date[3].to_i
-    }
+  def square_date(date)
+    date.to_i ** 2
   end
 
-  def generate_shifts
-    shifts = {}
-    shifts[:a] = @keys[:a] + @offsets[:a]
-    shifts[:b] = @keys[:b] + @offsets[:b]
-    shifts[:c] = @keys[:c] + @offsets[:c]
-    shifts[:d] = @keys[:d] + @offsets[:d]
-    shifts
+  def truncate_date(date)
+    square_date(date).to_s[-4..-1]
+  end
+
+  def generate_offsets(date = generate_date)
+    offset_values = truncate_date(date)
+
+    { a: offset_values[0].to_i,
+      b: offset_values[1].to_i,
+      c: offset_values[2].to_i,
+      d: offset_values[3].to_i }
+  end
+
+  def generate_shifts(keys, offsets)
+    { a: keys[:a] + offsets[:a],
+      b: keys[:b] + offsets[:b],
+      c: keys[:c] + offsets[:c],
+      d: keys[:d] + offsets[:d] }
   end
 
   def char_set
@@ -56,22 +52,22 @@ class Enigma
     char_set.zip(shifted_set).to_h
   end
 
-  def shift_string(string)
+  def shift_string(string, shifts)
     shifted_sets = {
-      a: shifted_char_set(generate_shifts[:a]),
-      b: shifted_char_set(generate_shifts[:b]),
-      c: shifted_char_set(generate_shifts[:c]),
-      d: shifted_char_set(generate_shifts[:d])
+      a: shifted_char_set(shifts[:a]),
+      b: shifted_char_set(shifts[:b]),
+      c: shifted_char_set(shifts[:c]),
+      d: shifted_char_set(shifts[:d])
     }
     shift_chars(string, shifted_sets)
   end
 
-  def unshift_string(string)
+  def unshift_string(string, shifts)
     unshifted_sets = {
-    a: shifted_char_set(-generate_shifts[:a]),
-    b: shifted_char_set(-generate_shifts[:b]),
-    c: shifted_char_set(-generate_shifts[:c]),
-    d: shifted_char_set(-generate_shifts[:d])
+      a: shifted_char_set(-shifts[:a]),
+      b: shifted_char_set(-shifts[:b]),
+      c: shifted_char_set(-shifts[:c]),
+      d: shifted_char_set(-shifts[:d])
     }
     shift_chars(string, unshifted_sets)
   end
@@ -95,23 +91,17 @@ class Enigma
   end
 
   def encrypt(string, key = generate_random_key, date = generate_date)
-    generate_offsets(date)
-    generate_keys(key)
-    encryption_data = {}
-    encryption_data[:encryption] = shift_string(string)
-    encryption_data[:key] = key
-    encryption_data[:date] = date
-    encryption_data
+    offsets = generate_offsets(date)
+    keys = generate_keys(key)
+    shifts = generate_shifts(keys, offsets)
+    { encryption: shift_string(string, shifts), key: key, date: date }
   end
 
   def decrypt(string, key, date = generate_date)
-    generate_offsets(date)
-    generate_keys(key)
-    decryption_data = {}
-    decryption_data[:decryption] = unshift_string(string)
-    decryption_data[:key] = key
-    decryption_data[:date] = date
-    decryption_data
+    offsets = generate_offsets(date)
+    keys = generate_keys(key)
+    shifts = generate_shifts(keys, offsets)
+    { decryption: unshift_string(string, shifts), key: key, date: date }
   end
 
 end
