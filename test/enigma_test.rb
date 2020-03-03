@@ -86,6 +86,7 @@ class EnigmaTest < Minitest::Test
       c: 73,
       d: 20
     }
+    
     assert_equal "keder ohulw", @enigma.shift_string("hello world", shifts)
     assert_equal "keder ohulw!", @enigma.shift_string("hello world!", shifts)
     assert_equal "!hxeoosprrdx", @enigma.shift_string("!hello world", shifts)
@@ -123,7 +124,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_decrypt
-
     decrypted = {
       decryption: "hello world",
       key: "02715",
