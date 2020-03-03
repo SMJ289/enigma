@@ -32,6 +32,7 @@ class CipherTest < Minitest::Test
 
   def test_it_can_shift_string
     assert_equal "keder ohulw", @enigma.shift_message("hello world", @shifts)
+    assert_equal "keder ohulw", @enigma.shift_message("HELLO WORLD", @shifts)
     assert_equal "keder ohulw!", @enigma.shift_message("hello world!", @shifts)
     assert_equal "!hxeoosprrdx", @enigma.shift_message("!hello world", @shifts)
     assert_equal "keder!sprrdx", @enigma.shift_message("hello! world", @shifts)
@@ -39,6 +40,7 @@ class CipherTest < Minitest::Test
 
   def test_it_can_unshift_string
     assert_equal "hello world", @enigma.unshift_message("keder ohulw", @shifts)
+    assert_equal "hello world", @enigma.unshift_message("KEDER OHULW", @shifts)
     assert_equal "hello world!", @enigma.unshift_message("keder ohulw!", @shifts)
     assert_equal "!hello world", @enigma.unshift_message("!hxeoosprrdx", @shifts)
     assert_equal "hello! world", @enigma.unshift_message("keder!sprrdx", @shifts)

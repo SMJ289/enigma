@@ -30,8 +30,9 @@ module Cipher
   end
 
   def shift_chars(message, shifts)
+    lowercase_message = message.downcase
     char_set = generate_char_set
-    message.chars.map.with_index do |char, index|
+    lowercase_message.chars.map.with_index do |char, index|
       determine_shift(shifts, char, index, char_set)
     end.join
   end
